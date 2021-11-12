@@ -1,14 +1,30 @@
-<%= @list.name %><br>
-<%# <%= @list %>
-<%# <%= @list.bookmarks %>
-<% @list.bookmarks.each do |bookmark| %>
-  <% movie = Movie.find(bookmark.movie_id) %>
-  <%= movie.title %><span> - </span>
-  <%= bookmark.comment  %>
-  <%= link_to 'Delete this bookmark', bookmark_path(bookmark), method: :delete, data: { confirm: "Delete?" } %>
-  <br>
-<% end %>
+<div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://source.unsplash.com/random')">
+  <%= @list.name %><br>
+</div>
 
-<%= link_to 'Add a bookmark to this list', new_list_bookmark_path(@list) %>
+<div class="d-flex flex-wrap justify-content-around">
+  <div class="card-trip mb-2">
+    <% @list.bookmarks.each do |bookmark| %>
+      <% movie = Movie.find(bookmark.movie_id) %>
+      <%= image_tag "#{movie.poster_url}" %>
+      <div class="card-infos">
+        <div>
+          <h2><%= movie.title %></h2>
+          <p><%= bookmark.comment  %></p>
+        </div>
+        <p class="card-delete"><%= link_to 'Delete this bookmark', bookmark_path(bookmark), method: :delete, data: { confirm: "Delete?" } %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<h3>Add a bookmark to this list</h3>
+
+<%= simple_form_for [@list, @bookmark] do |f| %>
+  <%= f.association :movie, label_method: :title, value_method: :id, input_html: { data: { controller: 'select2' }}%>
+  <%= f.input :comment %>
+  <%= f.button :submit %>
+<% end %>
 
 <%= link_to 'Back', lists_path %>
