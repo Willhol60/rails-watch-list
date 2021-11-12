@@ -6,11 +6,27 @@
 
 <%# banner? explaining the webapp %>
 
+<%# added to try and get around nothing displaying as added before photos added %>
+<%# <% @lists.each do |list| %>
+  <%# <% list.photo.key = 'https://images.pexels.com/photos/9443322/pexels-photo-9443322.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' %>
+<%# <% end %>
+
 <div class="container">
   <% @lists.each do |list| %>
-    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://source.unsplash.com/random')">
-      <%= link_to list.name, list_path(list) %>
-    </div>
+    <% if list.photo.nil? %>
+      <div class="card-category">
+        <%= link_to list.name, list_path(list) %>
+      </div>
+    <% else %>
+      <div class="card-category">
+      <%# style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path list.photo.key, height: 100, crop: :fit')"> %>
+        <%= link_to list.name, list_path(list) %>
+      </div>
+    <% end %>
   <% end %>
-
 </div>
+
+<%#
+<div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path list.photo, height: 100, crop: :fit %>
+        <%# <%= link_to list.name, list_path(list) %>
+      <%# </div> %>
