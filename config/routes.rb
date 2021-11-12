@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # get 'lists/:list_id/bookmarks', to: 'bookmarks#index'
   # get 'lists/:list_id/bookmarks/new', to:
 
+  root to: 'lists#index'
   resources :lists, only: [:index, :new, :create, :show] do
     resources :bookmarks, only: [:new, :create]
   end
