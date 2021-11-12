@@ -1,12 +1,16 @@
 <%# navbar %>
 <div class="navbar-lewagon">
-<img src="film_reel.png" alt="film reel">
-<%= link_to 'New List!', new_list_path %>
+<%= image_tag "film_reel.png", height: 36 %>
+<%= link_to 'Create a new list', new_list_path %>
+</div>
+
+<%# banner? explaining the webapp %>
+
+<div class="container">
+  <% @lists.each do |list| %>
+    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://source.unsplash.com/random')">
+      <%= link_to list.name, list_path(list) %>
+    </div>
+  <% end %>
 
 </div>
-<%# banner? explaining the webapp %>
-<% @lists.each do |list| %>
-  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://source.unsplash.com/random')">
-    <%= link_to list.name, list_path(list) %>
-  </div>
-<% end %>
