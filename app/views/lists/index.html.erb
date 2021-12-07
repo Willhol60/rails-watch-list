@@ -4,13 +4,6 @@
 <%= link_to 'Create a new list', new_list_path %>
 </div>
 
-<%# banner? explaining the webapp %>
-
-<%# added to try and get around nothing displaying as added before photos added %>
-<%# <% @lists.each do |list| %>
-  <%# <% list.photo.key = 'https://images.pexels.com/photos/9443322/pexels-photo-9443322.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' %>
-<%# <% end %>
-
 <div class="container">
   <% @lists.each do |list| %>
     <% if list.photo.nil? %>
